@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-E_CommerceMVC-f33b6e18-2451-45d4-bd12-22c95205315e</UserSecretsId>
   </PropertyGroup>

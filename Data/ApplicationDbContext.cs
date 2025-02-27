@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using E_CommerceMVC.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC.Data
@@ -9,5 +10,7 @@ namespace E_CommerceMVC.Data
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
