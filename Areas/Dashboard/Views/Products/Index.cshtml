@@ -7,19 +7,23 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <!-- Page Heading -->
+@*     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Tables</h1>
     <p class="mb-4">
         DataTables is a third party plugin that is used to generate the demo table below.
         For more information about DataTables, please visit the <a target="_blank"
                                                                    href="https://datatables.net">official DataTables documentation</a>.
-    </p>
+    </p> *@
+
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Products</h6>
-            <a class="btn btn-primary" asp-action="Create">Add Products</a>
+            <h3 class="m-0 font-weight-bold text-primary">All Products</h3>
+@*             <a class="btn btn-primary justify-content-md-end" asp-action="Create">Add Products</a>
+ *@            <div class="d-flex justify-content-end">
+                <a class="btn btn-primary" asp-action="Create">Add Products</a>
+            </div>
 
         </div>
         <div class="card-body">
