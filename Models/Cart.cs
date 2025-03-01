@@ -1,4 +1,6 @@
-﻿namespace E_CommerceMVC.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace E_CommerceMVC.Models
 {
     public class Cart
     {
@@ -8,5 +10,9 @@
         public Product Product { get; set; }
 
         public int Qty { get; set; }
+
+        public string UserId { get; set; }
+
+        public IdentityUser User { get; set; }
     }
 }
