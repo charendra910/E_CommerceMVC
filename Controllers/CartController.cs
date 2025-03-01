@@ -1,11 +1,13 @@
 ﻿using E_CommerceMVC.Data;
 using E_CommerceMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         public readonly ApplicationDbContext _context;
@@ -17,9 +19,15 @@ namespace E_CommerceMVC.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var currentuser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var cart = await _context.Carts
+                .Where(x => x.UserId == currentuser.Id)
+                .ToListAsync();
+
+            return View(cart);
         }
 
         public async Task<IActionResult> AddToCart(int productId, int qty = 1)
@@ -33,9 +41,13 @@ namespace E_CommerceMVC.Controllers
                 return BadRequest();
             }
 
-            var cart = new Cart { ProductId = productId, Qty = qty };
+            var cart = new Cart { ProductId = productId, Qty = qty, UserId = currentuser.Id };
 
-            return View(cart);
+            _context.Add(cart);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
         }
 
 
