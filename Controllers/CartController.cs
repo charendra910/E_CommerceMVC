@@ -28,6 +28,15 @@ namespace E_CommerceMVC.Controllers
                 .Where(x => x.UserId == currentuser.Id)
                 .ToListAsync();
 
+            double totalCost = 0;
+
+            foreach (var cartItem in cart)
+            {
+                totalCost += cartItem.Product.Price * cartItem.Qty;
+            }
+
+            ViewBag.TotalCost = totalCost;
+
             return View(cart);
         }
 
