@@ -15,15 +15,15 @@
                                 <div class="col-lg-5">
                                     <div class="me-lg-5">
                                         <div class="d-flex">
-                                            <img src="https://mdbootstrap.com/img/bootstrap-ecommerce/items/11.webp" alt="Winter Jacket" class="border rounded me-3" style="width: 96px; height: 96px;">
+                                            <img src="@cartItem.Product.Image" alt="Winter Jacket" class="border rounded me-3" style="width: 96px; height: 96px;">
                                             <div class="">
-                                                <a href="#" class="nav-link">Winter jacket for men and lady</a>
-                                                <p class="text-muted">Yellow, Jeans</p>
+                                                <a href="#" class="nav-link">@cartItem.Product.Name</a>
+                                             @*    <p class="text-muted">Yellow, Jeans</p> *@
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                              @*   <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                                     <div class="">
                                         <select id="product-1" style="width: 100px;" class="form-select me-4" onchange="submitCart(2)">
                                             <option>1</option>
@@ -32,15 +32,38 @@
                                             <option>4</option>
                                         </select>
                                     </div>
+                                    <div class=""> *@
+
+                                <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
                                     <div class="">
-                                        <text class="h6">$1156.00</text> <br>
-                                        <small class="text-muted text-nowrap"> $460.00 per item </small>
+                                        @{
+                                            var selectedValue = cartItem.Qty;
+                                            var items = new List<SelectListItem>
+                                    {
+                                    new SelectListItem { Value = "1", Text = "1", Selected = (selectedValue == 1) },
+                                    new SelectListItem { Value = "2", Text = "2", Selected = (selectedValue == 2) },
+                                    new SelectListItem { Value = "3", Text = "3", Selected = (selectedValue == 3) },
+                                    new SelectListItem { Value = "4", Text = "4", Selected = (selectedValue == 4) },
+                                    new SelectListItem { Value = "5", Text = "5", Selected = (selectedValue == 5) },
+                                    new SelectListItem { Value = "6", Text = "6", Selected = (selectedValue == 6) },
+                                    new SelectListItem { Value = "7", Text = "7", Selected = (selectedValue == 7) },
+                                    new SelectListItem { Value = "8", Text = "8", Selected = (selectedValue == 8) },
+                                    new SelectListItem { Value = "9", Text = "9", Selected = (selectedValue == 9) },
+                                    new SelectListItem { Value = "10", Text = "10", Selected = (selectedValue == 10) },
+                                    };
+                                        }
+                                        <select id="product-@cartItem.ProductId" data-productId="@cartItem.ProductId" style="width: 100px;" class="form-select me-4" onchange="submitCart(@cartItem.ProductId)" asp-items="items">
+                                        </select>
                                     </div>
+                                    <div class="">
+                                        <text class="h6">$@cartItem.Product.Price</text> <br>
+@*                                         <small class="text-muted text-nowrap"> $460.00 per item </small>
+ *@                                    </div>
                                 </div>
                                 <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                                     <div class="float-md-end">
                                         <a href="#!" class="btn btn-light border px-2 icon-hover-primary" aria-label="Add to favorites"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                                        <a href="#" class="btn btn-light border text-danger icon-hover-danger" aria-label="Remove item"> Remove</a>
+                                        <a asp-controller="Cart" asp-action="Remove" asp-route-id="@cartItem.Id" class="btn btn-light border text-danger icon-hover-danger" aria-label="Remove item"> Remove</a>
                                     </div>
                                 </div>
                             </div>
@@ -112,4 +135,38 @@
 
 @section Styles {
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+}
+
+@section Scripts {
+    <script>
+        function submitCart (productId) {
+        // Get the select element for the given product ID
+        const selectElement = document.getElementById(`product-${productId}`);
+        // Get the selected quantity and the product ID from the data attribute
+        const qty = selectElement.value;
+        const productID = selectElement.getAttribute('data-productId');
+        // Create a new form element
+        const form = document.createElement('form');
+        form.method = 'GET';
+        form.action = '/Cart/UpdateQty';
+        // Create hidden input fields for product ID and quantity
+        const productInput = document.createElement('input');
+        productInput.type = 'hidden';
+        productInput.name = 'productId';
+        productInput.value = productID;
+
+        const qtyInput = document.createElement('input');
+        qtyInput.type = 'hidden';
+        qtyInput.name = 'qty';
+        qtyInput.value = qty;
+        // Append the hidden fields to the form
+        form.appendChild(productInput);
+        form.appendChild(qtyInput);
+        // Append the form to the document body (it's necessary to append before submitting)
+        document.body.appendChild(form);
+        // Submit the form
+        form.submit();
+        }
+</script> I
+
 }
