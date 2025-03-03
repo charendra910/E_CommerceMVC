@@ -65,6 +65,20 @@ namespace E_CommerceMVC.Controllers
 
             await _context.SaveChangesAsync();
 
+            foreach (var cart in carts)
+            {
+                var orderProduct = new OrderProduct
+                {
+                    ProductId = cart.ProductId,
+                    OrderId = order.Id,
+                    Price = cart.Product.Price,
+                    Qty = cart.Qty,
+                };
+                _context.Add(orderProduct);
+            }
+
+            await _context.SaveChangesAsync();
+
             return RedirectToAction("ThankYou");
         }
 

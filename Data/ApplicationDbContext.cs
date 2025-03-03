@@ -18,5 +18,7 @@ namespace E_CommerceMVC.Data
         public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderProduct> OrderProducts { get; set; }
     }
 }
