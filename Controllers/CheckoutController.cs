@@ -31,6 +31,43 @@ namespace E_CommerceMVC.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> Confirm(int addressId)
+        {
+            var address = await _context.Addresses.Where(x => x.Id == addressId).FirstOrDefaultAsync();
+            if (address == null)
+            {
+                return BadRequest();
+            }
+            var currentuser = await _userManager.GetUserAsync(HttpContext.User);
+
+            double orderCost = 0;
+
+            var carts = await _context.Carts
+            .Include(x => x.User)
+            .Where(x => x.UserId == currentuser.Id).ToListAsync();
+
+            foreach (var cart in carts)
+            {
+                orderCost += (cart.Product.Price * cart.Qty);
+            }
+
+            var order = new Order
+            {
+                AddressId = addressId,
+                CreatedAt = DateTime.Now,
+                Status = "Order Placed",
+                UserId = currentuser.Id,
+                Amount = orderCost,
+            };
+
+            _context.Orders.Add(order);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ThankYou");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Index(Address address)
         {
