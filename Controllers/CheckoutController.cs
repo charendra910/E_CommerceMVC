@@ -17,6 +17,15 @@ namespace E_CommerceMVC.Controllers
             _userManager = userManager;
         }
 
+
+
+
+
+
+
+
+
+
         public async Task<IActionResult> Index()
         {
             var currentuser = await _userManager.GetUserAsync(HttpContext.User);
@@ -82,6 +91,12 @@ namespace E_CommerceMVC.Controllers
             return RedirectToAction("ThankYou");
         }
 
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Index(Address address)
         {
@@ -98,5 +113,6 @@ namespace E_CommerceMVC.Controllers
 
             return View(address);
         }
+
     }
 }

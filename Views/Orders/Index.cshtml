@@ -10,10 +10,8 @@
                 <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
-@*                             <th scope="col">#</th>
- *@                            <th scope="col">Order ID</th>
-@*                             <th scope="col">Customer Name</th>
- *@                            <th scope="col">Date</th>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Total</th>
                             <th scope="col">Actions</th>
@@ -24,10 +22,8 @@
                        @foreach(var order in Model)
                        {
                             <tr>
-@*                             <th scope="row">1</th>
- *@                            <td>@order.Id</td>
-@*                             <td>John Doe</td>
- *@                            <td>@order.CreatedAt.ToShortDateString()</td>
+                            <td>@order.Id</td>
+                            <td>@order.CreatedAt.ToShortDateString()</td>
                             <td>
                                 <span class="badge text-success">@order.Status</span>
                             </td>

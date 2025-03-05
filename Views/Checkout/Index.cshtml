@@ -15,7 +15,9 @@
                     <div class="card-body">
                         <h5>@addres.User.UserName</h5>
                         <p>@addres.AddressLine, @addres.City @addres.State - @addres.PinCode</p>
-                        <a asp-controller="Checkout" asp-action="Confirm" asp-route-addressId="@addres.Id" class="btn btn-primary">Deliver Here</a>
+@*                         <a asp-controller="Checkout" asp-action="Confirm" asp-route-addressId="@addres.Id" class="btn btn-primary">Deliver Here</a>
+ *@               
+                          <a asp-controller="Checkout" asp-action="ThankYou" asp-route-addressId="@addres.Id" class="btn btn-primary">Deliver Here</a>
                     </div>
                 </div>
             </div>
