@@ -1,28 +1,26 @@
-﻿using E_CommerceMVC.Data;
+﻿using E_CommerceMVC.Configuration;
+using E_CommerceMVC.Data;
 using E_CommerceMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC.Controllers
 {
+    [Authorize]
     public class CheckoutController : Controller
     {
         public readonly ApplicationDbContext _context;
         public readonly UserManager<IdentityUser> _userManager;
+        private readonly IRazorPayConfiguration _razorPay;
 
-        public CheckoutController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CheckoutController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IRazorPayConfiguration razorPay)
         {
             _context = context;
             _userManager = userManager;
+            _razorPay = razorPay;
         }
-
-
-
-
-
-
-
 
 
 
