@@ -2,9 +2,10 @@
 
 <section class="py-5">
     <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="row gx-4 gx-lg-5  justify-content-center">
             <div class="col-md-12">
                 <h2 class="mb-4">Order List</h2>
+
 
                 <!-- Order List Table -->
                 <table class="table table-bordered table-hover">
@@ -19,20 +20,20 @@
                     </thead>
                     <tbody>
                         <!-- Sample Order Row -->
-                       @foreach(var order in Model)
-                       {
+                        @foreach(var order in Model)
+                        {
                             <tr>
                             <td>@order.Id</td>
                             <td>@order.CreatedAt.ToShortDateString()</td>
                             <td>
-                                <span class="badge text-success">@order.Status</span>
+                                    <span class="badge text-success">@order.Status</span>
                             </td>
                             <td>$@order.Amount</td>
                             <td>
                                 <a asp-controller="Orders" asp-action="Details" asp-route-id="@order.Id" class="btn btn-primary btn-sm">View</a>
                             </td>
                         </tr>
-                       }
+                        }
                     </tbody>
                 </table>
             </div>
