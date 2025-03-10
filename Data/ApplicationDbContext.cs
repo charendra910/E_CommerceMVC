@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace E_CommerceMVC.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Product> Products { get; set; }
@@ -20,5 +21,7 @@ namespace E_CommerceMVC.Data
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderProduct> OrderProducts { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }

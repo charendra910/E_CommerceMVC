@@ -1,5 +1,6 @@
 ﻿using E_CommerceMVC.Data;
 using E_CommerceMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,9 @@ namespace E_CommerceMVC.Controllers
     public class CartController : Controller
     {
         public readonly ApplicationDbContext _context;
-        public readonly UserManager<IdentityUser> _userManager;
+        public readonly UserManager<ApplicationUser> _userManager;
 
-        public CartController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CartController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;

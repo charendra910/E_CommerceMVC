@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace E_CommerceMVC.Models
+﻿namespace E_CommerceMVC.Models
 {
     public class Address
     {
@@ -8,7 +6,7 @@ namespace E_CommerceMVC.Models
 
         public string UserId { get; set; }
 
-        public IdentityUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
         public string AddressLine { get; set; }
 

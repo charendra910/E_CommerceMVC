@@ -15,7 +15,9 @@ namespace E_CommerceMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var orders = await _context.Orders.ToListAsync();
+            var orders = await _context.Orders
+                .Include(x => x.OrderProducts)
+                .ToListAsync();
 
             return View(orders);
         }

@@ -1,7 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
+ @{
+    var user = await UserManager.Users.FirstOrDefaultAsync(x => x.Id == UserManager.GetUserId(User));
+} 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
