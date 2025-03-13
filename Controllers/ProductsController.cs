@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ecommerce.Controllers
+namespace E_CommerceMVC.Controllers
 {
     public class ProductsController : Controller
     {
