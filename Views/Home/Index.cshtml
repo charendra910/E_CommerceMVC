@@ -5,25 +5,64 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+<style>
+    .ext {
+        margin-top: 50px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .ext:hover {
+        transform: scale(1.05);
+    }
+
+</style>
+
+
+
 @section PageTitle {
 <!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+<header class=" py-5">
+   @*  <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Shop in style</h1>
             <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
         </div>
+    </div> *@
+
+
+    <div class="container mt-3">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/img/Slider/navslider.webp" class="d-block w-100 " alt="slider1">
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
     </div>
+      
 </header>
 }
 
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
+
+
+
+<section class="container mt-0">
+    <div class="px-4 px-lg-5 ">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
             @foreach(var product in Model.Products)
             {
-                <div class="col mb-5">
+                <div class="col mb-5 ext sec-bg1">
                     <div class="card h-100">
                         <!-- Sale badge-->
                          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div> 
