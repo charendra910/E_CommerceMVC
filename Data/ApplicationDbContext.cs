@@ -23,5 +23,8 @@ namespace E_CommerceMVC.Data
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<AboutUs> AboutUs { get; set; } // Table for About Us content
+
     }
 }
