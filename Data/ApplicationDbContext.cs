@@ -26,5 +26,8 @@ namespace E_CommerceMVC.Data
 
         public DbSet<AboutUs> AboutUs { get; set; } // Table for About Us content
 
+        public DbSet<ContactModel> ContactUs { get; set; }
+
+
     }
 }

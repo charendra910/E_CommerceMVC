@@ -1,0 +1,184 @@
+﻿@model E_CommerceMVC.Models.ContactModel
+
+
+@{
+    ViewData["Title"] = "AddContactUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    * {
+        font: 'Poppins', sans-serif;
+    }
+
+    /* Page Styling */
+    .text-gradient {
+        background: linear-gradient(90deg, #ff8a00, #e52e71);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+    /* Gradient Background */
+    .gradient-background {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        padding: 60px 0;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+    .span1 {
+        width: 80px;
+        height: 4px;
+        top: -5px;
+        margin-top: 0px;
+        position: relative;
+        display: inline-block;
+        background: red;
+        vertical-align: baseline;
+    }
+
+    .contact-detail {
+        font-size: 19px;
+        line-height: 1.8em;
+    }
+
+    .sec-contact i {
+        font-size: 25px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .sh1 {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .sh1:hover {
+            transform: scale(1.05);
+        }
+
+</style>
+
+
+
+<!-- Page Title -->
+<div class="gradient-background mt-4">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold text-gradient">🚀 Contact Us</h1>
+        <p class="lead text-white">Shop Online With Us</p>
+    </div>
+</div>
+
+
+<section class="container-fluid">
+    <div class="container-sm">
+        <div class="row">
+
+          
+            <div class="col-lg-6 col-12" style="margin-left:20px;">
+                <div class="p-4">
+                    <h2>
+                        Get in Touch
+                    </h2>
+                    <span class="span1"></span>
+                    <p class="contact-detail mt-3">
+                        We are committed to ensuring the availability of safe and adequate blood supplies.
+                        If you have any inquiries about donations, requests, or collaborations, please reach out to us.
+                        Our team is here to help you with any information regarding blood availability, donor registration,
+                        and blood drive campaigns.Feel free to contact us with any questions or for further assistance.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-5 col-12 animate__animated animate__pulse " style="margin-left:70px;">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/male-mobile-game-developer-illustration-download-in-svg-png-gif-file-formats--minecraft-logo-development-pack-business-illustrations-6885145.png?f=webp" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="container-fluid mt-5">
+
+    <div class="container">
+
+        <div class="row contact-detail text-center sec-contact">
+
+            <div class="col-lg-4 sh1 shadow ms-4">
+                <div class="justify-content-center align-items-center">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                    <h3>Address</h3>
+                    <p>RK University, Rajkot, Gujarat</p>
+                </div>
+            </div><!-- End Info Item -->
+
+            <div class="col-lg-3 col-md-6 sh1 shadow ms-3">
+                <div class="justify-content-center align-items-center">
+                    <i class="fa-solid fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>+91 9956303809</p>
+                </div>
+            </div><!-- End Info Item -->
+
+            <div class="col-lg-4 col-md-6 sh1 shadow ms-3">
+                <div class="justify-content-center align-items-center">
+                    <i class="fa-solid fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>harendratharu0@gmail.com</p>
+                </div>
+            </div><!-- End Info Item -->
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<section class="container-fluid mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12 map-contact">
+                <div class="">
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.9912315303445!2d70.89784381131392!3d22.24041147964518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959b4a660019ee9%3A0x3d6254f36ed0e794!2sRK%20University%20Main%20Campus!5e0!3m2!1sen!2sin!4v1730020726547!5m2!1sen!2sin"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-12 bg-light" id="form-contact">
+
+                <form method="post" class="row g-3 mt-1" id="contact-form">
+                    <div class="col-md-6">
+                        <label class="form-label" asp-for="Name">Name</label>
+                        <input asp-for="Name" type="text" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" type="email" class="form-control">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="Address" class="form-label">Address</label>
+                        <input asp-for="Address" type="text" class="form-control" placeholder="Your Address">
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="col-12">
+                        <label asp-for="Message" class="form-label">Message</label>
+                        <textarea asp-for="Message" type="text" rows="5" class="form-control" placeholder="Leave messages here" id="floatingTextarea"></textarea>
+                        <span asp-validation-for="Message" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
