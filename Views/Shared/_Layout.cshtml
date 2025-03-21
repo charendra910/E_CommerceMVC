@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> EcommerceShop</title>
+    <title>🛍️ EcommerceShop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ecommerce.styles.css" asp-append-version="true" />
@@ -14,8 +14,8 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     @await RenderSectionAsync("Styles", required: false)
-
 </head>
+
 <body>
   
     @await Component.InvokeAsync("Navigation")
@@ -25,7 +25,7 @@
 
    
 
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -49,7 +49,7 @@
         <footer class="text-center text-lg-start text-black"
                 style="background-color: #fafafa">
             <!-- Grid container -->
-            <div class="container p-4 pb-0">
+            <div class="container-fluid p-4 pb-0">
                 <!-- Section: Links -->
                 <section class="">
                     <!--Grid row-->
@@ -60,9 +60,8 @@
                                 E_Commerce Shop
                             </h6>
                             <p>
-                                Here you can use rows and columns to organize your footer
-                                content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                                elit.
+                                Shop sustainably at Our E_Commerce App! We are committed to offering eco-friendly and ethically sourced 
+                                products that are good for you and the planet. Join us in making a positive impact with every purchase.
                             </p>
                         </div>
                         <!-- Grid column -->
@@ -183,3 +182,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+

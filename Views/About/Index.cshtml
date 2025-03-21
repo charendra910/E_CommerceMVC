@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "About Us";
 }
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
 <style>
     /* Page Styling */
@@ -73,15 +75,17 @@
 </style>
 
 <!-- Page Title -->
-<div class="gradient-background mt-4">
+<section class="container-fluid">
+<div class="gradient-background mt-4 animate__animated animate__fadeInDown">
     <div class="container text-center">
         <h1 class="display-4 fw-bold text-gradient">🚀 About Us</h1>
         <p class="lead text-white">Discover Our Journey & Mission</p>
     </div>
 </div>
+</section>
 
 <!-- Dynamic Content Section -->
-<div class="container mt-5">
+<div class="container-fluid mt-5">
     @for (int i = 0; i < Model.Count; i++)
     {
         var item = Model[i];
