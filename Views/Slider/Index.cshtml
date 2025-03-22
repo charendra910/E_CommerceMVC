@@ -1,0 +1,55 @@
+﻿@* 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1> *@
+
+
+@model List<SliderImage> 
+
+<div class="container-fluid parent">
+    @foreach (var image in Model)
+    {
+        <div class="child">
+            <img src="@image.ImageUrl" class="d-block w-100" alt="@image.AltText">
+        </div>
+    }
+
+</div>@if (Model.Any())
+{
+    <div class="container-fluid parent">
+        @foreach (var image in Model)
+        {
+            <div class="child">
+                <img src="@image.ImageUrl" class="d-block w-100" alt="@image.AltText">
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No images found.</p>
+}
+
+
+<style>
+    .parent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Space between images */
+    }
+
+    .child {
+        flex: 1 1 calc(16.666% - 10px); /* 6 images per row */
+        box-sizing: border-box;
+    }
+
+        .child img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+</style>
+

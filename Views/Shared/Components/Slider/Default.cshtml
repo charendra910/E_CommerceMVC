@@ -1,0 +1,26 @@
+﻿@model List<SliderImage>
+
+
+<div class="container-fluid parent bg-light" style="display: flex; flex-direction: column; height: auto;">
+    <!-- Non-scrollable header -->
+    <div style="flex-shrink: 0;">
+        <p class="m-1 fs-4 fw-bolder">Best of Electronic Devices</p>
+    </div>
+
+    <!-- Scrollable content -->
+    <div style="flex-grow: 1; overflow-y: auto;">
+        @if (Model == null || !Model.Any())
+        {
+            <p>No images found in the database.</p>
+        }
+        else
+        {
+            @foreach (var image in Model)
+            {
+                <div class="child">
+                    <img src="@image.ImageUrl" class="d-block w-100" alt="@image.AltText">
+                </div>
+            }
+        }
+    </div>
+</div>

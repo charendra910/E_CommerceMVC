@@ -1,0 +1,20 @@
+﻿
+@* @{
+    ViewData["Title"] = "_SliderPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>_SliderPartial</h1> *@
+
+
+@model List<SliderImage>
+
+<div class="container-fluid parent">
+    @foreach (var image in Model)
+    {
+        <div class="child">
+            <img src="@image.ImageUrl" class="d-block w-100" alt="@image.AltText">
+        </div>
+    }
+</div>
+

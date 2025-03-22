@@ -28,6 +28,6 @@ namespace E_CommerceMVC.Data
 
         public DbSet<ContactModel> ContactUs { get; set; }
 
-
+        public DbSet<SliderImage> SliderImages { get; set; }
     }
 }
