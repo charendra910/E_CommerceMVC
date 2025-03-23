@@ -8090,7 +8090,7 @@ textarea.form-control-lg {
 
 .text-muted {
     --bs-text-opacity: 1;
-    color: #393d41!important;
+    color: #393d41! important;
 }
 
 .text-black-50 {

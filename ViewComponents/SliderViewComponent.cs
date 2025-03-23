@@ -26,6 +26,8 @@ namespace E_CommerceMVC.ViewComponents
             var sliderImages = await _context.SliderImages
                 .Where(img => img.Category == category) // Filter by category
                 .ToListAsync();
+            // Pass the category to the view
+            ViewBag.Category = category;
 
             return View(sliderImages);
         }

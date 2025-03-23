@@ -1,10 +1,9 @@
 ﻿@model List<SliderImage>
 
-
 <div class="container-fluid parent bg-light" style="display: flex; flex-direction: column; height: auto;">
     <!-- Non-scrollable header -->
     <div style="flex-shrink: 0;">
-        <p class="m-2 fs-4 fw-bolder">Best of Electronic Devices</p>
+        <p class="m-2 fs-4 fw-bolder">Best of @ViewBag.Category</p>
     </div>
 
     <!-- Scrollable content -->
@@ -14,7 +13,6 @@
             <p>No images found in the database.</p>
             <br />
         }
-
         else
         {
             @foreach (var image in Model)
@@ -24,6 +22,6 @@
                 </div>
             }
         }
-        <br /> <br /> 
+        <br /> <br />
     </div>
 </div>
