@@ -1,3 +1,99 @@
-﻿<h1>Thank you for your Order</h1>
+﻿@{
+    ViewData["Title"] = "Thank You";
+}
 
-<a asp-controller="Orders" asp-action="Index">Go Orders</a>
+<div class="thank-you-container">
+    <h1 class="thank-you-heading">Thank you for your Order!</h1>
+    <p class="thank-you-message">Your order has been successfully placed. We appreciate your business!</p>
+    <a asp-controller="Orders" asp-action="Index" class="thank-you-button">Go to Orders</a>
+</div>
+
+<style>
+    /* General Styles */
+    .thank-you-container {
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+        background: linear-gradient(135deg, #6a11cb);
+        padding: 40px 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Heading Styles with Gradient and Typing Animation */
+    .thank-you-heading {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        border-right: 3px solid #ff7e5f;
+        animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite, hide-caret 0.1s 3s forwards;
+    }
+
+    /* Message Styles (No Box, Just Text) */
+    .thank-you-message {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        color: #feb47b;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 3s ease-in-out;
+    }
+
+    /* Button Styles with Bounce and Hover Effects */
+    .thank-you-button {
+        display: inline-block;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #ff7e5f;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        animation: bounce 2s infinite;
+    }
+
+        .thank-you-button:hover {
+            background-color: #feb47b;
+            transform: scale(1.1);
+        }
+
+    /* Animations */
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+
+   
+    @@keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-20px);
+        }
+
+        60% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
