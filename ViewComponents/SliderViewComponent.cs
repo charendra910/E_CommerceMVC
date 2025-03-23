@@ -14,11 +14,22 @@ namespace E_CommerceMVC.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        //public async Task<IViewComponentResult> InvokeAsync()
+        //{
+        //    var sliderImages = await _context.SliderImages.ToListAsync();
+        //    return View("Default", sliderImages);
+        //}
+
+
+        public async Task<IViewComponentResult> InvokeAsync(string category)
         {
-            var sliderImages = await _context.SliderImages.ToListAsync();
-            return View("Default", sliderImages);
+            var sliderImages = await _context.SliderImages
+                .Where(img => img.Category == category) // Filter by category
+                .ToListAsync();
+
+            return View(sliderImages);
         }
+
     }
 }
 

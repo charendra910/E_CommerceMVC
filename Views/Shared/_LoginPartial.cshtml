@@ -6,7 +6,7 @@
 @{
     var user = await UserManager.Users.FirstOrDefaultAsync(x => x.Id == UserManager.GetUserId(User));
 }
-<ul class="navbar-nav">
+<ul class="navbar-nav fw-bolder">
     @if (SignInManager.IsSignedIn(User))
     {
 
