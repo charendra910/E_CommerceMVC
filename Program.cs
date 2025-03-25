@@ -3,6 +3,7 @@ using E_CommerceMVC.Data;
 using E_CommerceMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
