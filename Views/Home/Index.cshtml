@@ -105,20 +105,27 @@
                             <div class="text-center">
                                 <!-- Product name-->
                                 <h5 class="fw-bolder">
-                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                                    <a class="text-dark" style="text-decoration: none;" asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
                                         @product.Name
                                     </a>
-                                    </h5>
+                                 </h5>
                                 <!-- Product price-->
-                                @*  <span class="text-muted text-decoration-line-through">$@product.Price</span>  *@
                                 $@product.Price
                             </div>
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
+                          
+
+                          @*   <div class="text-center">
                                 <a asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.Id" class="btn btn-outline-dark mt-auto">Add to cart</a>
+                            </div> *@
+
+                            <div class="text-center">
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary mt-auto">View Details</a>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

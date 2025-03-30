@@ -7,6 +7,8 @@ namespace E_CommerceMVC.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string FullName => $"{FirstName} {LastName}";
+        public string FullName => $"{FirstName}";
+
+        //public string FullName => $"{FirstName} {LastName}";
     }
 }
