@@ -92,7 +92,7 @@
     <div class="px-4 px-lg-5 ">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-            @foreach(var product in Model.Products)
+            @foreach(var product in Model.Products.Take(8))
             {
                 <div class="col mb-5 ext sec-bg1">
                     <div class="card h-100">
@@ -122,7 +122,7 @@
                             </div> *@
 
                             <div class="text-center">
-                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary mt-auto">View Details</a>
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-warning mt-auto rounded-5">View Details</a>
                             </div>
 
 
