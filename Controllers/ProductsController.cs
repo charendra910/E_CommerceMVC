@@ -45,5 +45,38 @@ namespace E_CommerceMVC.Controllers
             }
             return View(product);
         }
+
+        public async Task<IActionResult> Electronics()
+        {
+            var electronicsProducts = await _context.Products
+                .Where(p => p.Category.Name == "Electronics")
+                .ToListAsync();
+
+            ViewBag.CategoryName = "Electronics";
+            return View("CategoryView", electronicsProducts);
+        }
+
+
+        public async Task<IActionResult> Clothing()
+        {
+            var clothingProducts = await _context.Products
+                .Where(p => p.Category.Name == "Clothing")
+                .ToListAsync();
+
+            ViewBag.CategoryName = "Clothing";
+            return View("CategoryView", clothingProducts);
+        }
+
+        public async Task<IActionResult> OtherCategories()
+        {
+            var otherProducts = await _context.Products
+                .Where(p => p.Category.Name != "Electronics" &&
+                           p.Category.Name != "Clothing")
+                .ToListAsync();
+
+            ViewBag.CategoryName = "Other Categories";
+            return View("CategoryView", otherProducts);
+        }
+
     }
 }

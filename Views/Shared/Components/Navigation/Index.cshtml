@@ -2,6 +2,15 @@
 
 @model NavigationViewModel
 
+<!-- CSS for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- CSS for animations -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+
   <!-- Navigation-->
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light pt-3 pb-3">
     <div class="container-fluid px-4 px-lg-5">
@@ -30,24 +39,24 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Category" asp-route-category="Electronics">
-                                <i class="bi bi-laptop me-2"></i>Electronics
+                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Electronics" asp-route-category="Electronics">
+                                <i class="fa-solid fa-laptop me-2 fa-beat-fade"></i>Electronics
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Category" asp-route-category="Clothing">
-                                <i class="bi bi-tshirt me-2"></i>Clothing
+                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Clothing" asp-route-category="Clothing">
+                                <i class="fa-solid fa-shirt fa-fade me-1"></i>Clothing
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Category" asp-route-category="Home">
-                                <i class="bi bi-house-door me-2"></i>Home & Garden
+                            <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="OtherCategories" >
+                                <i class="fa-solid fa-chair me-2 fa-flip"></i>Other Products
                             </a>
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item" asp-area="" asp-controller="Contactus" asp-action="AddContactUs">
-                                <i class="bi bi-headset me-2"></i>Contact Us
+                                <i class="fa-solid fa-headphones fa-bounce me-2"></i>Contact Us
                             </a>
                         </li>
                     </ul>
@@ -138,5 +147,24 @@
     .btn-outline-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Clothing category specific */
+    .clothing-banner {
+        background: linear-gradient(135deg, #f6d365, #fda085) !important;
+    }
+
+    /* Other categories specific */
+    .other-banner {
+        background: linear-gradient(135deg, #a1c4fd, #c2e9fb) !important;
+    }
+
+    /* Category icons */
+    .bi-tshirt {
+        color: #e83e8c;
+    }
+
+    .bi-grid {
+        color: #20c997;
     }
 </style>

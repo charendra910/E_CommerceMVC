@@ -1,0 +1,64 @@
+﻿@model List<Product>
+@{
+    string categoryName = ViewBag.CategoryName;
+}
+
+<style>
+    .category-banner {
+        background: linear-gradient(135deg, @(categoryName == "Clothing" ? "#f6d365, #fda085" : "#a1c4fd, #c2e9fb") );
+        padding: 60px 0;
+        border-radius: 15px;
+        margin-bottom: 30px;
+    }
+</style>
+
+<section class="container-fluid">
+    <div class="category-banner mt-4">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">
+                @if (categoryName == "Clothing")
+                {
+                    <text>👕 @categoryName</text>
+                }
+                else
+                {
+                    <text>📦 @categoryName</text>
+                }
+            </h1>
+            <p class="lead text-white">Browse our @categoryName collection</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var product in Model)
+            {
+                <div class="col mb-5">
+                    <!-- Your existing product card HTML -->
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@product.Image" alt="@product.Name" />
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">
+                                    <a class="text-dark" style="text-decoration:none;"
+                                       asp-action="Details" asp-route-id="@product.Id">
+                                        @product.Name
+                                    </a>
+                                </h5>
+                                $@product.Price
+                            </div>
+                        </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a asp-action="Details" asp-route-id="@product.Id"
+                                   class="btn btn-primary mt-auto">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
