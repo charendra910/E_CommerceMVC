@@ -14,11 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="About" asp-action="Index">Our Story</a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
@@ -56,6 +54,19 @@
                 </li>
             </ul>
 
+            <!-- Search Bar -->
+            <form class="d-flex flex-grow-1 mx-2 mx-lg-5" asp-controller="Products" asp-action="Index" method="get">
+                <div class="input-group rounded-pill">
+                    <input class="form-control rounded-pill" type="search" name="searchTerm"
+                           placeholder="Search for products . . . . ."
+                           value="@Context.Request.Query["searchTerm"]"
+                           aria-label="Search">
+                    <button class="btn btn-outline-primary rounded-pill ms-1" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+
             <partial name="_LoginPartial" />
 
             <form asp-controller="Cart" asp-action="Index" asp-area="" class="d-flex">
@@ -77,7 +88,7 @@
 </nav>
 
 <style>
-    /* Custom dropdown styling */
+    /* Custom dropdown styling - Original untouched */
     .dropdown-menu {
         border: none;
         border-radius: 10px;
@@ -104,8 +115,27 @@
             color: white;
         }
 
+    /* Search bar styling */
+    .input-group {
+        max-width: 600px; /* Adjust as needed */
+    }
+
+    .input-group-text {
+        border-left: none !important;
+        background-color: transparent !important;
+    }
+
+    .form-control {
+        border-right: none !important;
+    }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+        }
+
     /* Cart button animation */
-    .btn-outline-dark:hover {
+    .btn-outline-primary:hover {
         transform: translateY(-2px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }

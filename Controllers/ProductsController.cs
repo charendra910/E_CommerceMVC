@@ -1,4 +1,5 @@
 ﻿using E_CommerceMVC.Data;
+using E_CommerceMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,24 @@ namespace E_CommerceMVC.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTerm)
         {
-            var products = await _context.Products.ToListAsync();
+            IQueryable<Product> query = _context.Products;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                query = query.Where(p =>
+                    p.Name.Contains(searchTerm) ||
+                    p.Description.Contains(searchTerm));
+            }
+
+            var products = await query.ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                ViewBag.SearchTerm = searchTerm;
+                ViewBag.IsSearch = true;
+            }
 
             return View(products);
         }
@@ -27,7 +43,6 @@ namespace E_CommerceMVC.Controllers
             {
                 return NotFound();
             }
-
             return View(product);
         }
     }
