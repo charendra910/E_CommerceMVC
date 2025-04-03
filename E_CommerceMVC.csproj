@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Dashboard\Data\" />
-    <Folder Include="Areas\Dashboard\Models\" />
   </ItemGroup>
 
 </Project>

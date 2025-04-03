@@ -1,104 +1,159 @@
 ﻿@model E_CommerceMVC.Models.Order
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Order Details";
 }
 
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Order Details</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Order Details</h1>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-edit"></i>
+                </span>
+                <span class="text">Edit Order</span>
+            </a>
+            <a asp-action="Index" class="btn btn-secondary btn-icon-split ml-2">
+                <span class="icon text-white-50">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span class="text">Back to List</span>
+            </a>
+        </div>
+    </div>
 
-    <!-- DataTales Example -->
+    <!-- Order Summary Card -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Order Details</h6>
+        <div class="card-header bg-primary py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-white">Order Summary</h6>
+            <span class="badge badge-light">Order #@Model.Id</span>
         </div>
         <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.User)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.User.FullName)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Address)
-                </dt>
-                <dd class="col-sm-10">
-                    @Model.Address.AddressLine @Model.Address.City @Model.Address.State @Model.Address.PinCode
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Amount)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Amount)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Status)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Status)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.CreatedAt)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.CreatedAt)
-                </dd>
-            </dl>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4 border-left-info">
+                        <div class="card-body">
+                            <h5 class="card-title text-info">Customer Information</h5>
+                            <hr>
+                            <div class="mb-3">
+                                <strong>Customer Name:</strong>
+                                <p class="mt-1">@Model.User.FullName</p>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Order Date:</strong>
+                                <p class="mt-1">@Model.CreatedAt.ToString("f")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4 border-left-success">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Shipping Information</h5>
+                            <hr>
+                            <div class="mb-3">
+                                <strong>Shipping Address:</strong>
+                                <p class="mt-1">
+                                    @Model.Address.AddressLine<br>
+                                    @Model.Address.City, @Model.Address.State @Model.Address.PinCode
+                                </p>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Order Status:</strong>
+                                <span class="badge @GetStatusBadgeClass(Model.Status)">@Model.Status</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <h3>Order Products</h3>
-
-
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.OrderProducts.FirstOrDefault().Product.Image)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.OrderProducts.FirstOrDefault().Product.Name)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.OrderProducts.FirstOrDefault().Product.Price)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.OrderProducts.FirstOrDefault().Qty)
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.OrderProducts)
-                    {
-                        <tr>
-                            <td>
-                                <img src="@item.Product.Image" width="200" />
-                            </td>
-                            <td>
-                                @item.Product.Name
-                            </td>
-                            <td>
-                                @item.Price
-                            </td>
-                            <td>
-                                @item.Qty
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                <a asp-action="Index">Back to List</a>
+            <div class="card border-left-warning">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">Payment Summary</h5>
+                    <hr>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Total Amount:</strong>
+                        </div>
+                        <div>
+                            <h4 class="text-dark">$ @Model.Amount</h4> <!-- Removed ₹ -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-
-
+    <!-- Order Items Card -->
+    <div class="card shadow mb-4">
+        <div class="card-header bg-gradient-info py-3">
+            <h6 class="m-0 font-weight-bold text-white">Order Items</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Product</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderProducts)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@item.Product.Image" class="img-fluid" style="max-height: 80px;" alt="@item.Product.Name">
+                                </td>
+                                <td class="align-middle">
+                                    <strong>@item.Product.Name</strong>
+                                </td>
+                                <td class="align-middle">
+                                    @item.Price <!-- Removed ₹ -->
+                                </td>
+                                <td class="align-middle">
+                                    @item.Qty
+                                </td>
+                                <td class="align-middle">
+                                    @(item.Price * item.Qty) <!-- Removed ₹ -->
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="bg-light">
+                        <tr>
+                            <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                            <td><strong>$ @Model.Amount</strong></td> <!-- Removed ₹ -->
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
     </div>
 
 </div>
 
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        switch (status.ToLower())
+        {
+            case "pending":
+                return "badge-warning";
+            case "processing":
+                return "badge-info";
+            case "completed":
+                return "badge-success";
+            case "cancelled":
+                return "badge-danger";
+            default:
+                return "badge-secondary";
+        }
+    }
+}

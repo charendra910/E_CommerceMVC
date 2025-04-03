@@ -7,7 +7,6 @@
     var user = await UserManager.Users.FirstOrDefaultAsync(x => x.Id == UserManager.GetUserId(User));
 }
 
-
 <ul class="navbar-nav fw-bolder">
     @if (SignInManager.IsSignedIn(User))
     {
@@ -32,9 +31,23 @@
                     </a>
                 </li>
                 <li><hr class="dropdown-divider my-2"></li>
-                <li class="nav-item">
-                    <a class="nav-link text-danger ms-1" asp-controller="Dashboard" asp-action="Index" title="Manage">👨🏻‍💻 Admin</a>
-                </li> 
+
+                @if (await UserManager.IsInRoleAsync(user, "Admin"))
+                {
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center text-danger" asp-area="Dashboard" asp-controller="Home" asp-action="Index">
+                            <i class="fas fa-tachometer-alt me-2" style="width: 20px"></i>Admin Dashboard
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center text-danger" asp-area="Dashboard" asp-controller="AdminAuth" asp-action="Login">
+                            <i class="fas fa-user-shield me-2" style="width: 20px"></i>Admin Login
+                        </a>
+                    </li>
+                }
 
                 <li>
                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -58,7 +71,7 @@
 </ul>
 
 <style>
-    /* Custom dropdown styling */
+    /* Your existing custom dropdown styling remains the same */
     .nav-item.dropdown .btn {
         padding: 0.375rem 1rem;
         font-size: 0.9rem;

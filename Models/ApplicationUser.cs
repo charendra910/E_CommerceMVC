@@ -10,5 +10,11 @@ namespace E_CommerceMVC.Models
         public string FullName => $"{FirstName}";
 
         //public string FullName => $"{FirstName} {LastName}";
+
+
+        // Add admin flag (keep all existing properties)
+        public bool IsAdmin { get; set; } = false;
+
+
     }
 }

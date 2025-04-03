@@ -1,36 +1,114 @@
 ﻿@model E_CommerceMVC.Models.Category
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Category Details";
 }
 
-<h1>Details</h1>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-5">Category Details</h1>
+        <div>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Categories
+            </a>
+        </div>
+    </div>
 
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-    </dl>
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white py-3">
+            <h4 class="card-title mb-0">
+                <i class="fas fa-tag me-2"></i>Category Information
+            </h4>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <!-- Category Image -->
+                <div class="col-md-4 mb-4 mb-md-0">
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <div class="text-center">
+                            <img src="@Model.Image" class="img-fluid rounded-3 shadow" style="max-height: 250px; width: auto;" alt="@Model.Name">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center bg-light p-4 rounded-3">
+                            <i class="fas fa-image fa-4x text-muted mb-3"></i>
+                            <p class="text-muted">No image available</p>
+                        </div>
+                    }
+                </div>
+
+                <!-- Category Details -->
+                <div class="col-md-8">
+                    <dl class="row g-3">
+                        <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Name)</dt>
+                        <dd class="col-sm-9 fs-5 fw-bold text-dark">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-3 text-muted">@Html.DisplayNameFor(model => model.Description)</dt>
+                        <dd class="col-sm-9">
+                            @if (!string.IsNullOrEmpty(Model.Description))
+                            {
+                                @Html.DisplayFor(model => model.Description)
+                            }
+                            else
+                            {
+                                <span class="text-muted">No description available</span>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card-footer bg-light py-3">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <span class="text-muted small">Category ID: @Model.Id</span>
+                </div>
+                <div>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4">
+                        <i class="fas fa-edit me-2"></i>Edit Category
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    dt {
+        font-weight: 500;
+    }
+
+    dd {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px dashed #eee;
+    }
+
+    .btn {
+        transition: all 0.2s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+    .img-fluid {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
