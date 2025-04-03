@@ -1,71 +1,203 @@
 ﻿@model Order
 
-<section class="py-5">
+<!-- Add this CSS for print styling -->
+<style>
+    @@media print {
+        body {
+            background: white;
+            font-size: 12pt;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .no-print {
+            display: none !important;
+        }
+
+        .card {
+            border: none;
+            box-shadow: none;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background: white !important;
+            color: black !important;
+            border-bottom: 2px solid #333 !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa !important;
+        }
+
+        .badge {
+            border: 1px solid black;
+            background: white !important;
+            color: black !important;
+        }
+
+        .text-success {
+            color: #28a745 !important;
+        }
+
+        img {
+            max-width: 80px !important;
+        }
+
+        .print-header {
+            display: block !important;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+    }
+
+    .print-header {
+        display: none;
+    }
+</style>
+
+<section class="py-5 bg-light">
     <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5  justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
+        <!-- This header will only appear when printing -->
+        <div class="print-header">
+            <h1>Order Invoice</h1>
+            <p>Generated on @DateTime.Now.ToString("MMMM dd, yyyy h:mm tt")</p>
+        </div>
+
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-10">
+                <!-- Order Header Card -->
+                <div class="card shadow-sm mb-4 border-0">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom">
+                        <h2 class="h5 mb-0 text-primary">
+                            <i class="fas fa-receipt me-2"></i>Order #@Model.Id
+                        </h2>
+                        <span class="badge bg-@GetStatusColor(Model.Status) text-white p-2">@Model.Status</span>
+                    </div>
                     <div class="card-body">
-                        <div class="top-status">
-                            <h5>ORDER# @Model.Id</h5>
-                        </div>
-                        <div>
-                            <h5>Address:</h5>
-                            <p>@Model.Address.AddressLine @Model.Address.City @Model.Address.State - @Model.Address.PinCode</p>
-                        </div>
-
-                        <div>
-                            <h5>Order Amount:</h5>
-                            <p>$@Model.Amount</p>
-                        </div>
-
-                        <div>
-                            <h5>Status:</h5>
-                            <p>@Model.Status</p>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="p-3 bg-light rounded">
+                                    <h5 class="fw-bold mb-3"><i class="fas fa-map-marker-alt me-2"></i>Shipping Address</h5>
+                                    <p class="mb-1">@Model.Address.AddressLine</p>
+                                    <p class="mb-1">@Model.Address.City, @Model.Address.State</p>
+                                    <p class="mb-0">@Model.Address.PinCode</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 bg-light rounded">
+                                    <h5 class="fw-bold mb-3"><i class="fas fa-file-invoice-dollar me-2"></i>Order Summary</h5>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Order Date:</span>
+                                        <span>@Model.CreatedAt.ToString("MMMM dd, yyyy")</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total Amount:</span>
+                                        <span class="h5 text-success">$ @Model.Amount.ToString("0.00")</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card mt-4"></div>
-                <div class="card-body p-0 table-responsive">
-                    <h4 class="p-3 mb-0">Product Description</h4>
-                    <table class="table mb-0">
-                        <thead>
-                            <tr>
-                                <th scope="col">Product Image</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Unit Price</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var orderProduct in Model.OrderProducts)
-                            {
-                                <tr>
+                <!-- Order Items Card -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h3 class="h5 mb-0"><i class="fas fa-box-open me-2"></i>Order Items</h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="border-0" width="120px">Product</th>
+                                        <th class="border-0">Details</th>
+                                        <th class="border-0 text-end">Price</th>
+                                        <th class="border-0 text-center">Qty</th>
+                                        <th class="border-0 text-end">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var orderProduct in Model.OrderProducts)
+                                    {
+                                        <tr class="align-middle">
+                                            <td>
+                                                <img src="@orderProduct.Product.Image"
+                                                     class="img-fluid rounded border"
+                                                     alt="@orderProduct.Product.Name">
+                                            </td>
+                                            <td>
+                                                @orderProduct.Product.Name
+                                            </td>
+                                            <td class="text-end">@orderProduct.Price.ToString("0.00")</td>
+                                            <td class="text-center">@orderProduct.Qty</td>
+                                            <td class="text-end fw-bold">@((orderProduct.Price * orderProduct.Qty).ToString("0.00"))</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot class="bg-light">
+                                    <tr>
+                                        <td colspan="4" class="text-end fw-bold">Order Total:</td>
+                                        <td class="text-end fw-bold h5 text-success">$ @Model.Amount.ToString("0.00")</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-                                    <th>
-                                        <a asp-controller="Products" asp-action="Details" asp-route-id="@orderProduct.ProductId">
-                                            <img width="200"
-                                                 src="@orderProduct.Product.Image"
-                                                 alt="@orderProduct.Product.Name">
-                                        </a>
-                                    </th>
-                                    <td>
-                                        <a asp-controller="Products" asp-action="Details" asp-route-id="@orderProduct.ProductId">@orderProduct.Product.Name</a>
-                                    </td>
-                                    <td>@orderProduct.Price</td>
-                                    <td>@orderProduct.Qty</td>
-                                    <td><strong>$@(orderProduct.Price * orderProduct.Qty)</strong></td>
-                                </tr>
-                            }
-                          
-                        </tbody>
-                    </table>
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between mt-4 no-print">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Orders
+                    </a>
+                    <div>
+                        <button onclick="window.print()" class="btn btn-success">
+                            <i class="fas fa-print me-2"></i>Print Invoice
+                        </button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
-    </div>
 </section>
+
+@functions {
+    string GetStatusColor(string status)
+    {
+        switch (status.ToLower())
+        {
+            case "pending": return "warning";
+            case "processing": return "info";
+            case "completed": return "success";
+            case "shipped": return "primary";
+            case "cancelled": return "danger";
+            default: return "secondary";
+        }
+    }
+}
+
+<!-- Add this JavaScript for better print handling -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // You can add additional print-related JavaScript here if needed
+        console.log('Print functionality ready');
+    });
+</script>
